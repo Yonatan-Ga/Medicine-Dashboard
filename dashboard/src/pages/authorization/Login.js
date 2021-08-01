@@ -1,12 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Jumbotron from "react-bootstrap/Jumbotron";
+import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+import Axios from "axios";
+
+const bcrypt = require('bcryptjs')
 
 function LoginPage() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    Axios.post("http://localhost:8080/login", {
+      email: email,
+      password: password,
+    }).then(() => {
+      console.log(Response);
+      // history.push("/");
+    });
+  }
+
+
   return (
     <Jumbotron>
-      <form>
-        <h3>Sign In</h3>
+      <form onSubmit={handleSubmit}>
+
+      <h3>Sign In</h3>
 
         <div className="form-group">
           <label>Email address</label>
@@ -14,6 +36,10 @@ function LoginPage() {
             type="email"
             className="form-control"
             placeholder="Enter email"
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+
           />
         </div>
 
@@ -23,6 +49,8 @@ function LoginPage() {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            onChange={(event) => {
+              setPassword(event.target.value)}}
           />
         </div>
 

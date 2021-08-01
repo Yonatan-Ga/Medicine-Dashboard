@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
+import ReminderPopup from "../components/layout/Reminder";
 
 // import MeetupList from '../components/meetups/MeetupList';
 
@@ -60,6 +61,9 @@ function WelcomePage() {
             <li>
               <Link to="/newPassword">Create New Password</Link>
             </li>
+            <ui>
+              <ReminderPopup />
+            </ui>
           </ul>
         </Col>
         <Col>
@@ -77,7 +81,7 @@ function WelcomePage() {
               <Link to="/profile">My Profile</Link>
             </li>
             <li>
-              <Link to="/addDrug">add a new drug</Link>
+              <Link to="/addDrug">add a new med</Link>
             </li>
           </ul>
         </Col>

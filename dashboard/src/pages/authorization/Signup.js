@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { useState } from "react";
 import Axios from "axios";
+
+const bcrypt = require('bcryptjs')
 
 function SignupPage() {
   const [first, setFirst] = useState("");
@@ -12,24 +14,24 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const displayInfo = () => {
-    console.log(first + last + country + user + email + password);
-  };
+  let history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("You clicked submit.");
+    const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync());
     Axios.post("http://localhost:8080/register", {
       first: first,
       last: last,
       country: country,
       user: user,
       email: email,
-      password: password,
+      password: hashedPassword,
     }).then(() => {
       console.log('Success');
-    })
-  };
+      history.push("/");
+    });
+  }
+
 
   return (
     <Jumbotron>
@@ -116,7 +118,6 @@ function SignupPage() {
         <button
           type="submit"
           className="btn btn-primary btn-block"
-          onClick={displayInfo}
         >
           Sign Up
         </button>

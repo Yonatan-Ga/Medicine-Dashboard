@@ -48,17 +48,22 @@ app.post("/register", (req, res) => {
   );
 });
 
-// Insert post 1
-// app.get('/addpost1', (req, res) => {
-//   let post = {first_name:'Yonatan', last_name:'Galkin', username:'yona', email:'harduf@gmail.com', password:'1234', country:'Israel'};
-//   let sql = 'INSERT INTO users SET ?';
-//   let query = db.query(sql, post, (err, result) => {
-//       if(err) throw err;
-//       console.log(result);
-//       res.send('Post 1 added...');
-//   });
-// });
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
 
+  db.query(
+    
+    "SELECT * FROM users WHERE (email=?) LIMIT 1", [email], 
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+          res.send(res.password);
+      } 
+    }
+  );
+});
 
 
 app.listen("8080", () => {
