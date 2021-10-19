@@ -52,7 +52,7 @@ function NewDrugForm(props) {
           </Col>
         </Form.Group>
         <Form.Group as={Row}>
-          <Form.Label hhtmlFor="image" column sm={3}>
+          <Form.Label htmlFor="image" column sm={3}>
             Drug Image
           </Form.Label>
           <Col sm={6}>

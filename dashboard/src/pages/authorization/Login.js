@@ -4,22 +4,23 @@ import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Axios from "axios";
 
-const bcrypt = require('bcryptjs')
-
 function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const history =useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
-    Axios.post("http://localhost:8080/login", {
+        Axios.post("http://localhost:8080/login", {
       email: email,
       password: password,
-    }).then(() => {
-      console.log(Response);
-      // history.push("/");
+    }).then((response) => {
+      // if (response.data) {
+      //   Axios.post("http://localhost:8080/set-cookie");
+      // }
+      // history.push('/');
     });
   }
 

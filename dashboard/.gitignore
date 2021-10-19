@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# old template
+/src/components/meetups
+/src/components/store/favorite-context.js
+
 # testing
 /coverage
 

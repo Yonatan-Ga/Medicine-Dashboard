@@ -1,6 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
-import DateAndTimePicker from "./DateAndTimePickers";
 
 function ReminderPopup() {
 
@@ -10,31 +9,24 @@ function ReminderPopup() {
 
   const handleShow = () => setShow(true);
     
-  var timePicked = new Date();
+  const [timePicked, setTimePicked] = useState(new Date());
 
-
-//Dont know how to get date
-
-//   function handleDate(date) {
-//     console.log(date);
-//   };
-
-
-//   function timeHandler(e) {
-//     console.log(e);
-   
-//     timePicked = this.e;
-   
-//     console.log(timePicked);
-
-//   }
+  function timeHandler(e) {
+  
+    setTimePicked(new Date(e.target.value));
+    console.log(timePicked);
+  }
 
   return (
     <>
-      <DateAndTimePicker />
+    <form>
+      <input type="datetime-local" onChange={timeHandler}/>
+      {/* <DateAndTimePicker /> */}
       <Button variant="primary" onClick={handleShow}>
         Time to take a pill!
       </Button>
+    </form>
+      
       <Modal
         show={show}
         onHide={handleClose}

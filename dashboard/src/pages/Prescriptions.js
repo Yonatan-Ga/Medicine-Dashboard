@@ -1,5 +1,28 @@
 // import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import PrescriptionsTable from "../components/drugs/PrescriptionsTable";
+
+const prescriptionsDummy = [
+  {
+    medicine_id: '1',
+    medicine_name: 'Acamol',
+    creation_date: '06/08/2021',
+    med_instructions: '2 Pills every 8 hours x 3 days'
+  },
+  {
+    medicine_id: '2',
+    medicine_name: 'Optalgin',
+    creation_date: '07/08/2021',
+    med_instructions: '1 pill every morning'
+  },
+  {
+    medicine_id: '3',
+    medicine_name: '...',
+    creation_date: '09/08/2021',
+    med_instructions: '...'
+  },
+
+]
 
 function PrescriptionsPage() {
   // const history = useHistory();
@@ -37,24 +60,7 @@ function PrescriptionsPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Acamol</td>
-            <td>2 Pills every 8 hours x 3 days</td>
-            <td>&#9999;&#65039; &#128465;&#65039;</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Optalgin</td>
-            <td>1 pill every morning</td>
-            <td>&#9999;&#65039; &#128465;&#65039;</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>.... </td>
-            <td>.....</td>
-            <td>&#9999;&#65039; &#128465;&#65039;</td>
-          </tr>
+          <PrescriptionsTable data={prescriptionsDummy} />    
         </tbody>
       </Table>
     </div>
