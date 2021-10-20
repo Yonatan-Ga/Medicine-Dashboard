@@ -6,9 +6,13 @@ import Axios from "axios";
 import CountrySelector, { countryValue } from "../../components/layout/CountrySelector";
 import { FormCheckLogic } from "./FormCheck"; //not working
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 const bcrypt = require("bcryptjs");
 
 function SignupPage() {
+
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   // const [country, setCountry] = useState("");
@@ -47,6 +51,8 @@ function SignupPage() {
         setServerResponse(res.data);
         console.log(res.data);
         if (res.data === "Success") {
+          // setCookie('name', first, { path: '/' });
+          // setCookie('loggedIn', true, { path: '/' });
           history.push("/");
         }
         

@@ -60,7 +60,8 @@ function MySchedulePage() {
           </tr>
         </thead>
         <tbody>
-          <ScheduleTable data={scheduleDummy} />{/* pass all reminders of user from DB */}
+          <ScheduleTable data={scheduleDummy} />
+          {/* pass all reminders of user from DB */}
           <tr>
             <td colSpan="4" className="text-center">
               <span>&lt;&lt; Yesterday</span>

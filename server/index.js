@@ -91,20 +91,23 @@ app.post("/login", (req, response) => {
           const hash = result[0].password;
           bcrypt.compare(password, hash, (err, res) => {
             if (!err && res) {
-              // response.send("1");
-              response.cookie('loggedIn', 'true').send('Cookie has bee set'); // Couldn't find the correct way to use cookies in those languages :(
-              console.log("need to set cookie for " + email);
+              console.log(result);
+              response.send(result);
+              // response.cookie('loggedIn', 'true').send('Cookie has bee set'); // Couldn't find the correct way to use cookies in those languages :(
+              // console.log("need to set cookie for " + email);
             } else {
               console.log(err, res);
             }
           });
+        } else {
+          response.send('notfound');
         }
       }
     );
   } else {
     console.log("Incorrect email and/or password!");
 
-    // response.send("Incorrect email and/or password!");
+    response.send("empty");
   }
 });
 
