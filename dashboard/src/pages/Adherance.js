@@ -78,6 +78,7 @@ function AdherancePage() {
                 </Dropdown>
               </Card.Body>
             </Card>
+            <br /><br />
           </Col>
 
           {/* Specific med adherance */}

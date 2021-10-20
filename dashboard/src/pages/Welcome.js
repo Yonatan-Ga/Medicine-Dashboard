@@ -2,7 +2,8 @@
 import { Link } from "react-router-dom";
 
 import { Container, Row, Col } from "react-bootstrap";
-import ReminderPopup from "../components/layout/Reminder";
+
+// import { useMediaQuery } from "react-responsive";
 
 // import MeetupList from '../components/meetups/MeetupList';
 
@@ -43,6 +44,12 @@ function WelcomePage() {
   //   );
   // }
 
+  // const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 1225px)" });
+  // const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  // const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  // const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
+
   return (
     <Container>
       <Row>
@@ -61,9 +68,6 @@ function WelcomePage() {
             <li>
               <Link to="/newPassword">Create New Password</Link>
             </li>
-            <ui>
-              <ReminderPopup />
-            </ui>
           </ul>
         </Col>
         <Col>

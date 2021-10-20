@@ -1,6 +1,7 @@
 // import { useContext } from 'react';
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import ReminderPopup from "./Reminder";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { fas } from '@fortawesome/free-solid-svg-icons'
 
@@ -33,6 +34,9 @@ function MainNavigation() {
                 {/* <img src={'./profile.png'} alt="Profile" /> */}
                 {/* <i style="font-size:24px" class="fa">&#xf007;</i> */}
               </Nav.Link>
+              <Nav>
+              <ReminderPopup />
+              </Nav>
             </Nav>
           </Navbar.Collapse>
         </Container>
