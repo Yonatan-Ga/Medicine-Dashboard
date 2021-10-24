@@ -12,10 +12,10 @@ const cookies = new Cookies();
 const bcrypt = require("bcryptjs");
 
 function SignupPage() {
+  const [boxChecked, setBoxChecked] = useState(false);
 
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
-  // const [country, setCountry] = useState("");
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,20 +45,37 @@ function SignupPage() {
         email: email,
         password: hashedPassword,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, // offset = -(new Date().getTimezoneOffset() / 60)
-        os: window.navigator.platform,
+        os: window.navigator.userAgentData,
         created: new Date()
       }).then((res) => {
         setServerResponse(res.data);
         console.log(res.data);
         if (res.data === "Success") {
-          // setCookie('name', first, { path: '/' });
-          // setCookie('loggedIn', true, { path: '/' });
+          if (boxChecked) {
+            // set expiry date for two weeks is "remember me" checked
+            let date = new Date();
+            date.setTime(date.getTime() + 14 * 24 * 60 * 60 * 1000);
+            date.toUTCString();
+  
+            cookies.set("name", first, {
+              path: "/",
+              expires: date,
+            });
+            cookies.set("loggedIn", true, { path: "/", expires: date });
+          } else {
+            // or set for Session if not checked
+            cookies.set("name", first, { path: "/" });
+            cookies.set("loggedIn", true, { path: "/" });
+          }
           history.push("/");
-        }
-        
+        }        
       });
     } else { setServerResponse(errorMessage) };
   }
+
+  const handleCheck = (e) => {
+    setBoxChecked(e);
+  };
 
   return (
     <Jumbotron>
@@ -94,22 +111,7 @@ function SignupPage() {
         </div>
         <div className="form-group">
           <label htmlFor="country">Country</label>
-          <CountrySelector id="country"
-            // onChange={
-            //   () => {
-            //     setCountry(countryValue.label);
-            //   }
-            // }
-          />
-          {/* <input
-            type="text"
-            className="form-control"
-            placeholder="Country"
-            id="country"
-            onChange={(event) => {
-              setCountry(event.target.value);
-            }}
-          /> */}
+          <CountrySelector id="country" />
         </div>
 
         <div className="form-group">
@@ -150,6 +152,20 @@ function SignupPage() {
             }}
           />
         </div>
+        <div className="form-group">
+          <div className="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id="stayLoggedIn"
+              onChange={(e) => {handleCheck(e.target.checked)}}
+            />
+            <label className="custom-control-label" htmlFor="stayLoggedIn">
+            Rremember me after registration complete
+            </label>
+          </div>
+        </div>
+
         <button type="submit" className="btn btn-primary btn-block">
           Sign Up
         </button>

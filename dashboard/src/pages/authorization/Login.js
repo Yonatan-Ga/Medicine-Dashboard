@@ -7,26 +7,54 @@ import Axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
+// const bcrypt = require("bcryptjs");
+
 function LoginPage() {
   const [serverResponse, setServerResponse] = useState("");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [boxChecked, setBoxChecked] = useState(false);
   const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
+    // const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     Axios.post("http://localhost:8080/login", {
       email: email,
+      // password: hashedPassword,
       password: password,
     }).then((response) => {
-      if (response.data !== "notfound" && response.data !== "empty") {
-        cookies.set("name", response.data[0].fname, { path: "/" });
-        cookies.set("loggedIn", true, { path: "/" });
+      if (
+        response.data !== "notfound" &&
+        response.data !== "empty" &&
+        response.data !== "wrongPassword"
+      ) {
+        console.log(response);
+        if (boxChecked) {
+          // set expiry date for two weeks is "remember me" checked
+          let date = new Date();
+          date.setTime(date.getTime() + 14 * 24 * 60 * 60 * 1000);
+          date.toUTCString();
+
+          cookies.set("name", response.data.fname, {
+            path: "/",
+            expires: date,
+          });
+          cookies.set("loggedIn", true, { path: "/", expires: date });
+          cookies.set("accessToken", response.data.accessToken, {
+            path: "/",
+            expires: date,
+          });
+        } else {
+          // or set for Session if not checked
+          cookies.set("name", response.data.fname, { path: "/" });
+          cookies.set("loggedIn", true, { path: "/" });
+          cookies.set("accessToken", response.data.accessToken, { path: "/" });
+        }
         history.push("/");
       } else {
-        if (response.data === "notfound") {
+        if (response.data === "notfound" || response.data === "wrongPassword") {
           setServerResponse("Incorrect email and/or password!");
         }
         if (response.data === "empty") {
@@ -36,6 +64,9 @@ function LoginPage() {
     });
   }
 
+  const handleCheck = (e) => {
+    setBoxChecked(e);
+  };
   return (
     <Jumbotron>
       <form onSubmit={handleSubmit}>
@@ -73,6 +104,9 @@ function LoginPage() {
               type="checkbox"
               className="custom-control-input"
               id="stayLoggedIn"
+              onChange={(e) => {
+                handleCheck(e.target.checked);
+              }}
             />
             <label className="custom-control-label" htmlFor="stayLoggedIn">
               Remember me
@@ -83,8 +117,15 @@ function LoginPage() {
         <button type="submit" className="btn btn-primary btn-block">
           Submit
         </button>
-        <p className="forgot-password text-right">
-          Forgot <Link to="/forgot">password?</Link>
+        <p className="text-right">
+          <br />
+          <span>
+            Forgot <Link to="/forgot">password? </Link>
+          </span>
+          <span>
+            &nbsp;&nbsp; | &nbsp;&nbsp; Not registerd yet?{" "}
+            <Link to="/signup">Sign-up</Link> Now!
+          </span>
         </p>
       </form>
     </Jumbotron>

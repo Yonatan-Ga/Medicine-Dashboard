@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-
+import Axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -14,6 +14,20 @@ function WelcomePage() {
       setName(cookies.get("name"));
     }
   }, [name]);
+
+  let message = "";
+//try to auth user with token. not comlete yet
+
+  const getInfo = () => {
+    const token = cookies.get('accessToken');
+    Axios.post("http://localhost:8080/token", {
+      "token": token
+
+    }).then((response) => {
+      console.log(response);
+        
+    });
+  }
 
   return (
     <Container>
@@ -29,6 +43,9 @@ function WelcomePage() {
                     setName('');
                     cookies.remove("name");
                   }}>Log out</Link>
+              </li>
+              <li>
+                <button onClick={() => {getInfo()}}>Get some info</button><br />{message}
               </li>
             </ul>
           </Col>
