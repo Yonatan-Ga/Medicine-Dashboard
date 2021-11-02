@@ -16,10 +16,11 @@ function WelcomePage() {
   }, [name]);
 
   let message = "";
+  
 //try to auth user with token. not comlete yet
 
   const getInfo = () => {
-    const token = cookies.get('accessToken');
+    const token = cookies.get('refreshToken');
     Axios.post("http://localhost:8080/token", {
       "token": token
 
@@ -42,6 +43,8 @@ function WelcomePage() {
                     cookies.remove("loggedIn");
                     setName('');
                     cookies.remove("name");
+                    cookies.remove("accessToken");
+                    cookies.remove("refreshToken");
                   }}>Log out</Link>
               </li>
               <li>

@@ -1,6 +1,8 @@
 import { Table } from "react-bootstrap";
 import PrescriptionsTable from "../components/drugs/PrescriptionsTable";
 
+// add auth proccess
+
 const prescriptionsDummy = [
   {
     medicine_id: "1",

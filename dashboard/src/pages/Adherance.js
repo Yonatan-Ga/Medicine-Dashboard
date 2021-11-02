@@ -3,6 +3,8 @@ import { RadialChart } from "react-vis";
 import { Col, Container, Row, Card, Dropdown } from "react-bootstrap";
 import MedAdherancePage from "../components/drugs/MedAdherance";
 
+// ADD AUTH PROCCESS
+
 function AdherancePage() {
   const [adheranceTime, setAdheranceTime] = useState("m");
 
@@ -11,7 +13,8 @@ function AdherancePage() {
     setAdheranceTime(e);
   };
 
-  
+  // Dummy data:
+
   const userAdherance = {
     month: "August",
     m: 0.6,
@@ -44,7 +47,7 @@ function AdherancePage() {
       <Container>
         <Row>
 
-            {/* All meds adherance */}
+            {/* All meds adherance. Can be inside a different component*/}
 
           <Col>
             <Card style={{ width: "18rem" }}>

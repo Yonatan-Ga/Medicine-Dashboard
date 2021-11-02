@@ -52,7 +52,7 @@ app.post("/register", (req, res) => {
         res.send("Email is already used. Please choose another or log in.");
       } else {
         db.query(
-          "SELECT * FROM users WHERE username = ? LIMIT 1",
+          "SELECT * FROM users WHERE username = ? LIMIT 1", // could be in the same search as the email...
           [user],
           (err, result) => {
             if (err) {
@@ -109,7 +109,7 @@ app.post("/login", (req, response) => {
             if (!err && res) {
               // console.log(result);
               // response.send(result);
-              const accessToken = generateAccessToken(result[0].id);
+              const accessToken = generateAccessToken(result[0].id); //JWT auth system is not complete. 
               const refreshToken = jwt.sign(
                 result[0].id,
                 process.env.REFRESH_TOKEN_SECRET
@@ -158,10 +158,13 @@ app.delete("/logout", (req, res) => {
 });
 
 function generateAccessToken(user) {
-  return jwt.sign({id: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 600 });
+  console.log('generateAccessToken')
+  return jwt.sign({id: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 6000 });
 }
 
-function authenticateToken(req, res, next) {
+function authenticateToken(req, res, next) { // need to check why using this
+  console.log('authenticateToken')
+
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
   if (token == null) return res.sendStatus(401)

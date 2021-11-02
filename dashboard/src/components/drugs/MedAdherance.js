@@ -116,9 +116,11 @@ function MedAdherancePage() {
             />
           )}
 
-          <Card.Title>Over All User Adherance</Card.Title>
+            {/* take title and text from DB to be related for each med. */}
+
+          <Card.Title>Specific Medicine Adherance</Card.Title>
           <Card.Text>
-            Adherance of all drugs together for a chosen time.
+            Adherance of a specific medicine for a chosen time.
           </Card.Text>
           <Dropdown onSelect={AdheranceTimeHandler}>
             <Dropdown.Toggle variant="success" id="med-time-chooser">

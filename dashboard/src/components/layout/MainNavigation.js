@@ -35,7 +35,10 @@ function MainNavigation() {
                 {/* <i style="font-size:24px" class="fa">&#xf007;</i> */}
               </Nav.Link>
               <Nav>
-              <ReminderPopup />
+                {/* Just here for testing.
+                Looked for a place that stay active when chainging pages.
+                Need to find a better solution. */}
+              <ReminderPopup /> 
               </Nav>
             </Nav>
           </Navbar.Collapse>

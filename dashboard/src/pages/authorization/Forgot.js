@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Need to add the backend part...
+// using tokens??
+
 function ForgotPasswordPage() {
   return (
     <form>

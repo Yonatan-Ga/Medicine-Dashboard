@@ -1,6 +1,8 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
 
+// Need to add the backend part...
+
 function NewPasswordPage() {
   return (
     <Jumbotron>

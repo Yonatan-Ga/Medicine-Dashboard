@@ -50,21 +50,22 @@ function ReminderPopup() {
           <Modal.Title>&#128276; Pill Reminder</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {/* Need to be taken from DB */}
           It's time for to take {"one pill of Optalgin at: " + timePicked}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
-            Dismiss
+            Dismiss {/* send response to db */}
           </Button>
           <Button variant="primary" onClick={() => {
             setIsRunnung(true);
             setShow(false);
             setTimePicked(timePicked + 300);
           }}>
-            Snooze (5 minutes)
+            Snooze (5 minutes) {/* send response to db */}
           </Button>
           <Button variant="success" onClick={handleClose}>
-            <strong>Taken!</strong>
+            <strong>Taken!</strong> {/* send response to db */}
           </Button>
         </Modal.Footer>
       </Modal>

@@ -46,11 +46,16 @@ function LoginPage() {
             path: "/",
             expires: date,
           });
+          cookies.set("refreshToken", response.data.refreshToken, {
+            path: "/",
+            expires: date,
+          });
         } else {
           // or set for Session if not checked
           cookies.set("name", response.data.fname, { path: "/" });
           cookies.set("loggedIn", true, { path: "/" });
           cookies.set("accessToken", response.data.accessToken, { path: "/" });
+          cookies.set("refreshToken", response.data.refreshToken, { path: "/" });
         }
         history.push("/");
       } else {

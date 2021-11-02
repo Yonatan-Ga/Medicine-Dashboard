@@ -29,7 +29,7 @@ function NewDrugForm(props) {
 
   return (
     <Jumbotron>
-      <form inLine>
+      <form inline>
         <Form.Group as={Row} className="mb-3">
           <Form.Label htmlFor="name" column sm={3}>
             Drug Name

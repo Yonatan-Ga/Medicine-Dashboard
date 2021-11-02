@@ -5,6 +5,8 @@ import ScheduleTable from "../components/drugs/ScheduleTable";
 // import FavoritesContext from '../store/favorites-context';
 // import MeetupList from '../components/meetups/MeetupList';
 
+// ADD AUTH PROCCESS
+
 function MySchedulePage() {
   // const favoritesCtx = useContext(FavoritesContext);
 

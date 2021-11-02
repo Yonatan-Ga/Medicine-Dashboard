@@ -4,7 +4,7 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import { useState } from "react";
 import Axios from "axios";
 import CountrySelector, { countryValue } from "../../components/layout/CountrySelector";
-import { FormCheckLogic } from "./FormCheck"; //not working
+import { FormCheckLogic } from "./FormCheck";
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -26,7 +26,7 @@ function SignupPage() {
   
   function handleSubmit(e) {
     e.preventDefault();
-    const [formIsValid, errorMessage] =    //not working                                                    
+    const [formIsValid, errorMessage] =                                                  
       FormCheckLogic(
         {first: first,
         last: last,
